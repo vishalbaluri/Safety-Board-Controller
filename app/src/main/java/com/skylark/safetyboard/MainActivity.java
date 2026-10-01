@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         buttonWifi.setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS)));
         buttonSettings.setOnClickListener(v -> showSettingsDialog());
         buttonDateTimeOptions.setOnClickListener(v -> showDateTimeOptionsDialog());
-        buttonReset.setOnClickListener(v -> ResetData());
+        buttonReset.setOnClickListener(v -> showResetConfirmDialog());
         buttonSend.setOnClickListener(v -> sendData());
         buttonClear.setOnClickListener(v -> clearData());
     }
@@ -543,6 +543,15 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }
         });
+    }
+
+    private void showResetConfirmDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Reset Accident Free Days")
+                .setMessage("Do you want to reset the number of accident free days to zero(0)?")
+                .setPositiveButton("Yes", (dialog, which) -> ResetData())
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
 
